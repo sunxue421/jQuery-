@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>豆瓣音乐</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="nav">
+        <div class="nav-info">
+            <a href="https://www.douban.com/accounts/login?source=music" class="nav-login">登录</a>
+            <a href="https://www.douban.com/accounts/register?source=music" class="nav-register">注册</a>
+        </div>
+        <div class="nav-doubanapp">
+            <a href="https://www.douban.com/doubanapp/app?channel=top-nav" class="lnk-doubanapp">下载豆瓣客户端</a>
+        </div>
+        <div class="nav-item">
+            <ul>
+                <li><a href="http://www.douban.com">豆瓣</a></li>
+                <li><a href="http://book.douban.com">读书</a></li>
+                <li><a href="http://movie.douban.com">电影</a></li>
+                <li><a href="http://music.douban.com">音乐</a></li>
+                <li><a href="http://www.douban.com/location">同城</a></li>
+                <li><a href="http://www.douban.com/group">小组</a></li>
+                <li><a href="https://read.douban.com/?dcs=top-nav&dcm=douban">阅读</a></li>
+                <li><a href="https://douban.fm/?from_=shire_top_nav">FM</a></li>
+                <li><a href="https://time.douban.com/?dt_time_source=douban-web_top_nav">时间</a></li>
+                <li><a href="https://dongxi.douban.com/?dcs=top-nav&dcm=douban">东西</a></li>
+                <li><a href="https://market.douban.com/?utm_campaign=douban_top_nav&utm_source=douban&utm_medium=pc_web">市集</a></li>
+                <li><a href="https://music.douban.com/#more">更多</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav-wrap">
+        <div class="nav-primary">
+            <div class="nav-logo"><a href="https://music.douban.com"></a></div>
+            <div class="nav-search">
+                <form action="https://music.douban.com/subject_search" method="get">
+                    <div class="inp">
+                        <input id="inp" type="" name="search-text" maxlength=60 placeholder="唱片名、表演者、条码、ISRC">
+                    </div>
+                    <div class="inp-btn">
+                        <input id="search" type="submit" value="">
+                    </div>
+                    <div class="search_suggest">
+                        <ul>
+                            <!-- <li>
+                                <a href="">
+                                    <img src="https://img3.doubanio.com//spic//s11185741.jpg" alt="">
+                                    <div class="text">
+                                        <p class="name">我只在乎你</p>
+                                        <p class="author">邓丽君</p>
+                                    </div>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="search-result">
+        <div class="search-title"><!-- <h1>搜索</h1> --></div>
+        <ul class="search-information">
+            <!-- <li>
+                <a href=""><img src="https://img3.doubanio.com//spic//s11185741.jpg" alt=""></a>
+                <div class="song-text">
+                    <p class="song-name">我只在乎你</p>
+                    <p class="tag">民谣/台湾</p>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+    <script src="jquery-3.2.1.js"></script>
+    <script>
+        $('#inp').on('keyup', function () {
+            var val = $('#inp').val();
+            if (val && val !== '') {
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://api.douban.com/v2/music/search?q=' + $('#inp').val(),
+                    // data: { search: $('#inp').val()},
+                    success: function (data) {
+                        $('.search_suggest ul').text("");
+                        console.log(data);
+                        if (data.count < 7) {
+                            for (var i = 0;i < data.count;i++) {
+                                $('.search_suggest ul').append($('<li></li>').append($('<a></a>').attr('href', data.musics[i].alt).append($('<img>').attr('src', data.musics[i].image)).append($('<div></div>').addClass('text').append($('<p></p>').addClass('name').text(data.musics[i].title)).append($('<p></p>').addClass('author').text("表演者：" + data.musics[i].author[0].name)))));
+                            }
+                        }else {
+                            for (var i = 0;i < 7;i++) {
+                                $('.search_suggest ul').append($('<li></li>').append($('<a></a>').attr('href', data.musics[i].alt).append($('<img>').attr('src', data.musics[i].image)).append($('<div></div>').addClass('text').append($('<p></p>').addClass('name').text(data.musics[i].title)).append($('<p></p>').addClass('author').text("表演者：" + data.musics[i].author[0].name)))));
+                            }
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    },
+                    dataType: 'jsonp'
+                });
+            }
+        });
+        $('#inp').on('blur', function () {
+            $('.search_suggest ul').text("");
+        });
+        $('#search').click(function (e) {
+            e.preventDefault();
+            if ($('#inp').val() !== '') {
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://api.douban.com/v2/music/search?q=' + $('#inp').val(),
+                    // data: { search: $('#inp').val()},
+                    success: function (data) {
+                        $('.search-title').text("");
+                        $('.search-information').text("");
+                        if (data.count < 10) {
+                            $('.search-title').append($('<div></div>').append($('<h1></h1>').text('搜索' + $('#inp').val())));
+                            for (var i = 0;i < data.count;i++) {
+                                var str = "";
+                                for (var j = 0;j < data.musics[i].tags.length;j++) {
+                                    str = str + data.musics[i].tags[j].name + "/";
+                                }
+                                $(".search-information").append($('<li></li>').append($('<a></a>').attr("herf",data.musics[i].alt).append($('<img>').attr("src",data.musics[i].image))).append($('<div></div>').addClass('song-text').append($('<p></p>').addClass('song-name').text(data.musics[i].title)).append($('<p></p>').addClass('tag').text(str))));
+                            }
+                        }else {
+                            $('.search-title').append($('<div></div>').append($('<h1></h1>').text('搜索' + $('#inp').val())));
+                            for (var i = 0;i < 10;i++) {
+                                var str = "";
+                                for (var j = 0;j < data.musics[i].tags.length;j++) {
+                                    str = str + data.musics[i].tags[j].name + "/";
+                                }
+                                $(".search-information").append($('<li></li>').append($('<a></a>').attr("herf",data.musics[i].alt).append($('<img>').attr("src",data.musics[i].image))).append($('<div></div>').addClass('song-text').append($('<p></p>').addClass('song-name').text(data.musics[i].title)).append($('<p></p>').addClass('tag').text(str))));
+                            }
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    },
+                    dataType: 'jsonp'
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>
