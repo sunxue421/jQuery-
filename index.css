@@ -1,0 +1,168 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.nav{
+    height: 28px;
+    min-width: 950px;
+    color: #d5d5d5;
+    background-color: #545652;
+    font: 12px Helvetica,Arial,sans-serif;
+    line-height: 1.62;
+}
+a{
+    cursor: pointer;
+    text-decoration: none;
+}
+.nav .nav-doubanapp a:hover{
+    color: #fff;
+}
+.nav .nav-doubanapp{
+    position: relative;
+    float: right;
+    margin-right: 5px;
+}
+.nav .nav-doubanapp .lnk-doubanapp{
+    height: 28px;
+    padding: 0 8px;
+    display: inline-block;
+    zoom: 1;
+    line-height: 28px;
+    color: #d5d5d5;
+}
+.nav .nav-info{
+    float: right;
+    line-height: 28px;
+    padding: 0 12px 0 0;
+}
+.nav .nav-info a{
+    height: 28px;
+    padding: 0 12px;
+    display: inline-block;
+    zoom: 1;
+    line-height: 28px;
+    color: #d5d5d5;
+}
+.nav .nav-info a:hover{
+    color: #fff;
+}
+.nav .nav-item li{
+    display: inline-block;
+    zoom: 1;
+    line-height: 28px;
+    font-size: 12px;
+}
+.nav .nav-item li a{
+    padding: 0 12px;
+    color: #d5d5d5;
+}
+.nav .nav-item li a:hover{
+    color: #fff;
+}
+.nav-wrap .nav-logo a{
+    float: left;
+    height: 56px;
+    width: 145px;
+    margin: 10px 13px 10px 13px;
+    background: url(./lg_music_a12_2.png) no-repeat 0 12px
+}
+.nav-wrap{
+    padding: 0 150px;
+    height: 70px;
+    background: #f0f3ef;
+}
+.nav-wrap .nav-search{
+    margin-left: 145px;
+    position: relative;
+    padding: 10px 0 15px 0;
+    width: 470px;
+    height: 34px;
+}
+.nav-search input{
+    border: none;
+}
+.nav-wrap .nav-search .inp input{
+    position: absolute;
+    float: left;
+    height: 30px;
+    width: 96%;
+    top: 20px;
+}
+.nav-wrap .nav-search .inp-btn input{
+    position: absolute;
+    left: 476px;
+    top: 20px;
+    background: url(./nav_mu_bg.png) no-repeat 0 -40px;
+    height: 30px;
+    width: 37px;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 2;
+}
+.nav-wrap .nav-primary .nav-search .search_suggest{
+    position: absolute;
+    top: 50px;
+    left: 25px;
+    z-index: 2;
+}
+.nav-wrap .nav-primary .nav-search .search_suggest ul li{
+    background-color: #fff;
+    width: 445px;
+    border: 1px solid #f0f3ef;
+    padding: 7px 0 5px 5px;
+}
+.nav-wrap .nav-primary .nav-search .search_suggest ul li img{
+    display: inline-block;
+    width: 40px;
+}
+.nav-wrap .nav-primary .nav-search .search_suggest ul li a{
+    display: block;
+}
+.nav-wrap .nav-primary .nav-search .search_suggest ul li .text{
+    display: inline-block;
+    width: 395px;
+    font-size: 13px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+.nav-wrap .nav-primary .nav-search .search_suggest ul li .name{
+    color: blue;
+}
+.nav-wrap .nav-primary .nav-search .search_suggest ul li .author{
+    color: grey;
+    margin-top: 5px;
+}
+.search-result{
+    position: absolute;
+    left: 150px;
+}
+.search-result .search-title h1{
+    color: #494949;
+    font-size: 25px;
+    margin: 16px 0 30px 10px;
+}
+.search-result .search-information li{
+    margin: 20px 0;
+}
+.search-result .search-information li a{
+    display: inline-block;
+}
+.search-result .search-information li .song-text{
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 20px;
+    vertical-align: top;
+}
+.search-result .search-information li .song-text .song-name{
+    cursor: pointer;
+}
+.search-result .search-information li .song-text .song-name:hover{
+    color: #fff;
+    background: #37a;
+}
+.search-result .search-information li .song-text .tag{
+    margin: 10px 0;
+    font-size: 12px;
+    color: #999;
+}
